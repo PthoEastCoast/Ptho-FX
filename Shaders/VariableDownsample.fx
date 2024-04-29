@@ -1,5 +1,5 @@
 /**
-	VariableDownsample version 2.4
+	VariableDownsample version 2.4.1
 	by PthoEastCoast
 
 	Makes it look as if the original image was downsampled from it's native resolution to a lower resolution of your choice.
@@ -33,9 +33,9 @@ uniform int VerticalResolution
 
 uniform int DownsampleBlurFactor
 < __UNIFORM_SLIDER_INT1
-	ui_min = 0.0; ui_max = 2.0;
+	ui_min = 0.0; ui_max = 5.0;
 	ui_tooltip = "Sets the amount of blur applied to the image when downsampling. (Lower values produce a sharper but more aliased image. Higher values produce a smoother but blurrier image.)";
-> = 0.0;
+> = 1.0;
 
 #include "ReShade.fxh"
 
@@ -51,7 +51,7 @@ float4 BoxBlurHorizontalPass(in float4 pos : SV_Position, in float2 texcoord : T
 {
 	float aspectRatio = 1.0 / BUFFER_ASPECT_RATIO;
 	float pixelUVSize = (1.0 / (float)VerticalResolution) * aspectRatio;
-	float smoothScale = (float)DownsampleBlurFactor * 0.125 + 0.25;
+	float smoothScale = (float)DownsampleBlurFactor * 0.05 + 0.25;
 	float uvDistBetweenSamples = (pixelUVSize * smoothScale) / numOfSamplesRight;
 
 	float4 accumulatedColor = float4(0.0, 0.0, 0.0, 1.0);
@@ -68,7 +68,7 @@ float4 BoxBlurHorizontalPass(in float4 pos : SV_Position, in float2 texcoord : T
 float4 BoxBlurVerticalPass(in float4 pos : SV_Position, in float2 texcoord : TEXCOORD) : COLOR
 {
 	float pixelUVSize = 1.0 / (float)VerticalResolution;
-	float smoothScale = (float)DownsampleBlurFactor * 0.125 + 0.25;
+	float smoothScale = (float)DownsampleBlurFactor * 0.05 + 0.25;
 	float uvDistBetweenSamples = (pixelUVSize * smoothScale) / numOfSamplesRight;
 
 	float4 accumulatedColor = float4(0.0, 0.0, 0.0, 1.0);
@@ -121,7 +121,7 @@ float3 PixelationPass(in float4 pos : SV_Position, in float2 texcoord : TEXCOORD
 	float tx = texcoordDistFromPixelX / pixelUVSizeX;
 	float ty = texcoordDistFromPixelY / pixelUVSizeY;
 
-	float powerAmount = 1.0 + UpscalingSetting * 0.2;
+	float powerAmount = 0.75 + UpscalingSetting * 0.25;
 		
 	tx = tx < 0.5 ? pow( abs(tx), powerAmount ) : pow( abs(tx), 1.0 / powerAmount );
 	ty = ty < 0.5 ? pow( abs(ty), powerAmount ) : pow( abs(ty), 1.0 / powerAmount );
