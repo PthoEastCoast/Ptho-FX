@@ -1,8 +1,9 @@
 /**
-	VariableDownsample version 2.4.1
+	DownsampleSSAA version 1.0
 	by PthoEastCoast
 
-	Makes it look as if the original image was downsampled from it's native resolution to a lower resolution of your choice.
+	Makes it look as if the image was downsampled from it's native resolution to a custom lower resolution. 
+	Giving the impression of rendering at a lower resolution but with higher image quality comparable to supersampling.
 	It blurs the original image and then pixelates the image after blurring.
 	For best image quality - run the game at the native resolution of your display. (higher render resolution = higher quality anti-aliasing/pixelation when downsampling)
 **/
@@ -134,7 +135,7 @@ float3 PixelationPass(in float4 pos : SV_Position, in float2 texcoord : TEXCOORD
 	return pixelColor;
 }
 
-technique VariableDownsample
+technique DownsampleSSAA
 {
 	pass BoxBlurHorizontalPass
 	{
