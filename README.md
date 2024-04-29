@@ -2,9 +2,9 @@
 
 A collection of shaders for ReShade by PthoEastCoast
 
-# VariableDownsample
+# DownsampleSSAA
 
-VariableDownsample emulates the look of downsampling the image from it's render resolution, to a lower resolution of your choosing.
+DownsampleSSAA emulates the look of downsampling the image from it's native resolution, to any custom lower resolution of your choice. It gives the impression of rendering at a lower resolution but with higher image quality comparable to supersampling. Includes settings to change the resolution, upscaling method, and amount of image blurring.
 
 ![trespasser](https://github.com/PthoEastCoast/Ptho-FX/assets/167894222/964bf2fb-ce96-433e-993a-8946faf1d08d)
 
