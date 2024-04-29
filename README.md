@@ -6,4 +6,6 @@ A collection of shaders for ReShade by PthoEastCoast
 
 VariableDownsample emulates the look of downsampling the image from it's render resolution, to a lower resolution of your choosing.
 
-![TrespasserComparison](https://github.com/PthoEastCoast/Ptho-FX/assets/167894222/b97309c7-edd4-4de0-918a-c95d8f9b034e)
+![trespasser](https://github.com/PthoEastCoast/Ptho-FX/assets/167894222/964bf2fb-ce96-433e-993a-8946faf1d08d)
+
+![roguetrooper](https://github.com/PthoEastCoast/Ptho-FX/assets/167894222/c3a9d465-7b32-4277-ac14-a1a00965a9bc)
