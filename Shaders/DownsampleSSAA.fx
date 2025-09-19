@@ -1,5 +1,5 @@
 /**
-	DownsampleSSAA version 1.0
+	DownsampleSSAA version 1.1
 	by PthoEastCoast
 
 	Makes it look as if the image was downsampled from it's native resolution to a custom lower resolution. 
@@ -15,15 +15,15 @@ uniform int UpscalingSetting
 	ui_type = "combo";
 	ui_items =	"Nearest-neighbor" "\0"
 				"Bilinear" "\0"
-				"Weighted Bilinear 1" "\0"
-				"Weighted Bilinear 2" "\0"
-				"Weighted Bilinear 3" "\0"
-				"Weighted Bilinear 4" "\0";
+				"Bilinear Sharp 1" "\0"
+				"Bilinear Sharp 2" "\0"
+				"Bilinear Sharp 3" "\0"
+				"Bilinear Sharp 4" "\0";
 	ui_label = "Image upscaling setting";
 	ui_tooltip = "Sets the method used to upscale the downsampled image.\n"
 	"Nearest-neighbor provides a pixel sharp image.\n"
 	"Bilinear provides a smooth image by blending between neighboring pixels.\n"
-	"Weighted Bilinear 1-4 will provide a progressively sharper image than Bilinear.";
+	"Bilinear Sharp 1-4 will provide a progressively sharper image than Bilinear.";
 > = 4;
 
 uniform int VerticalResolution 
@@ -52,7 +52,7 @@ float4 BoxBlurHorizontalPass(in float4 pos : SV_Position, in float2 texcoord : T
 {
 	float aspectRatio = 1.0 / BUFFER_ASPECT_RATIO;
 	float pixelUVSize = (1.0 / (float)VerticalResolution) * aspectRatio;
-	float smoothScale = (float)DownsampleBlurFactor * 0.05 + 0.25;
+	float smoothScale = (float)DownsampleBlurFactor * 0.1;
 	float uvDistBetweenSamples = (pixelUVSize * smoothScale) / numOfSamplesRight;
 
 	float4 accumulatedColor = float4(0.0, 0.0, 0.0, 1.0);
@@ -69,7 +69,7 @@ float4 BoxBlurHorizontalPass(in float4 pos : SV_Position, in float2 texcoord : T
 float4 BoxBlurVerticalPass(in float4 pos : SV_Position, in float2 texcoord : TEXCOORD) : COLOR
 {
 	float pixelUVSize = 1.0 / (float)VerticalResolution;
-	float smoothScale = (float)DownsampleBlurFactor * 0.05 + 0.25;
+	float smoothScale = (float)DownsampleBlurFactor * 0.1;
 	float uvDistBetweenSamples = (pixelUVSize * smoothScale) / numOfSamplesRight;
 
 	float4 accumulatedColor = float4(0.0, 0.0, 0.0, 1.0);
@@ -155,3 +155,4 @@ technique DownsampleSSAA
 		PixelShader = PixelationPass;
 	}
 }
+
